@@ -7,7 +7,7 @@ If munin and/or fail2ban are installed, additional tasks will run accordingly to
 
 ## Requirements
 
-_None._
+_none_
 
 ## Role Variables
 
@@ -21,7 +21,7 @@ mysql_password: a-secure-password
 
 ## Dependencies
 
-_None_
+_none_
 
 ## Example Playbook
 
