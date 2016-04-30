@@ -1,0 +1,19 @@
+---
+
+- include: mysql.yml
+
+- name: Check if munin-node is installed
+  command: dpkg -L munin-node
+  register: dpkg_munin_node_check
+  ignore_errors: yes
+
+- include: munin-plugin.yml
+  when: dpkg_munin_node_check.rc == 0
+
+- name: Check if fail2ban is installed
+  command: dpkg -L fail2ban
+  register: dpkg_fail2ban_check
+  ignore_errors: yes
+
+- include: fail2ban-jail.yml
+  when: dpkg_fail2ban_check.rc == 0

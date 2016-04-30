@@ -1,0 +1,6 @@
+---
+
+- name: Add base config
+  copy: src=jail.conf dest=/etc/fail2ban/jail.d/mysql.conf mode=0644
+  notify: restart_fail2ban
+  become: yes

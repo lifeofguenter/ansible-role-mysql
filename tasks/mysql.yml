@@ -1,0 +1,30 @@
+---
+
+- name: Prerequisites
+  apt: name=python-mysqldb cache_valid_time=3600 state=present
+  become: yes
+
+- name: Add apt-key
+  apt_key: keyserver=pgp.mit.edu id=5072E1F5
+  become: yes
+
+- name: Add repository
+  apt_repository: repo="deb http://repo.mysql.com/apt/{{ ansible_distribution | lower }}/ {{ ansible_distribution_release }} mysql-5.7" state=present
+  become: yes
+
+- name: Install MySQL
+  apt: name=mysql-server state=present
+  become: yes
+
+- name: Install libmysqlclient-dev
+  apt: name=libmysqlclient-dev state=present
+  become: yes
+
+- name: Create admin user
+  mysql_user: name="{{ mysql_user }}" password="{{ mysql_password }}" host="%" priv="*.*:ALL,GRANT" login_user=root state=present
+  become: yes
+
+- name: Add custom.cnf
+  template: src=custom.cnf.j2 dest=/etc/mysql/conf.d/custom.cnf mode=0644
+  notify: restart_mysql
+  become: yes

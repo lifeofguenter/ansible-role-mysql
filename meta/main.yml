@@ -1,0 +1,21 @@
+galaxy_info:
+  author: Gunter Grodotzki
+  description: Install MySQL (Oracle)
+  company: weheartwebsites UG
+  license: MIT
+  min_ansible_version: 2.0
+  platforms:
+  - name: Ubuntu
+    versions:
+    - precise
+    - trusty
+    - wily
+    - xenial
+  - name: Debian
+    versions:
+    - wheezy
+    - jessie
+  galaxy_tags:
+  - database
+  - sql
+dependencies: []
