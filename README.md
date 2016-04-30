@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/lifeofguenter/ansible-role-oracle-mysql.svg?branch=master)](https://travis-ci.org/lifeofguenter/ansible-role-oracle-mysql)
 
-# Ansible Role for TokuDB
+# Ansible Role for MySQL (Oracle)
 
 This ansible role will install MySQL (Oracle) and apply some "sane" production settings.
 If munin and/or fail2ban are installed, additional tasks will run accordingly to activate them for MySQL as well.
