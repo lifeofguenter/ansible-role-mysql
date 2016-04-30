@@ -1,1 +1,1 @@
-localhost
+localhost mysql_user=tradmin mysql_password=test
