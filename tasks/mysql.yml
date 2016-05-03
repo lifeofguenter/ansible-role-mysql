@@ -24,6 +24,23 @@
   mysql_user: name="{{ mysql_user }}" password="{{ mysql_password }}" host="%" priv="*.*:ALL,GRANT" login_user=root state=present
   become: yes
 
+- name: Copy service file for customization
+  copy: src=/lib/systemd/system/mysql.service dest=/etc/systemd/system/mysql.service remote_src=True
+  notify:
+    - reload_systemd
+    - restart_mysql
+  become: yes
+
+- name: Raise service limits
+  lineinfile: dest=/etc/systemd/system/mysql.service line="{{ item }}=infinity" insertafter='^\[Service\]'
+  with_items:
+    - LimitNOFILE
+    - LimitMEMLOCK
+  notify:
+    - reload_systemd
+    - restart_mysql
+  become: yes
+
 - name: Add custom.cnf
   template: src=custom.cnf.j2 dest=/etc/mysql/conf.d/custom.cnf mode=0644
   notify: restart_mysql

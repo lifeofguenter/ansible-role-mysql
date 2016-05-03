@@ -2,4 +2,6 @@
 
 bind_address: 0.0.0.0
 
+max_connections: 256
+
 innodb_buffer_pool_size: "{{ (ansible_memtotal_mb * 0.5) | round | int }}M"

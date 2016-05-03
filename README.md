@@ -12,11 +12,23 @@ _none_
 ## Role Variables
 
 ```
-mysql_user: admin
+mysql_user: *required*
 ```
 
 ```
-mysql_password: a-secure-password
+mysql_password: *required*
+```
+
+```
+bind_address: 0.0.0.0
+```
+
+```
+max_connections: 256
+```
+
+```
+innodb_buffer_pool_size: "{{ (ansible_memtotal_mb * 0.5) | round | int }}M"
 ```
 
 ## Dependencies
