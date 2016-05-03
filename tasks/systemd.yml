@@ -1,0 +1,18 @@
+---
+
+- name: Copy service file for customization
+  copy: src=/lib/systemd/system/mysql.service dest=/etc/systemd/system/mysql.service remote_src=True
+  notify:
+    - reload_systemd
+    - restart_mysql
+  become: yes
+
+- name: Raise service limits
+  lineinfile: dest=/etc/systemd/system/mysql.service regexp="^{{ item }}\s*=" line="{{ item }}=infinity" insertafter='^\[Service\]'
+  with_items:
+    - LimitNOFILE
+    - LimitMEMLOCK
+  notify:
+    - reload_systemd
+    - restart_mysql
+  become: yes

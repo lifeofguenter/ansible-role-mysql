@@ -2,6 +2,14 @@
 
 - include: mysql.yml
 
+- name: Check if systemd is installed
+  command: dpkg -L systemd
+  register: dpkg_systemd_check
+  ignore_errors: yes
+
+- include: systemd.yml
+  when: dpkg_systemd_check.rc == 0
+
 - name: Check if munin-node is installed
   command: dpkg -L munin-node
   register: dpkg_munin_node_check
