@@ -1,20 +1,20 @@
 [mysqld]
 skip-name-resolve
-max_connections = {{ max_connections }}
+max_connections = {{ mysql_max_connections }}
 table_open_cache = 2048
 log_warnings = 2
 slow_query_log = 1
 log_output = FILE
 slow_query_log_file = /var/log/mysql/mysql-slow.log
 long_query_time = 4
-bind-address = {{ bind_address }}
+bind-address = {{ mysql_bind_address }}
 
 #
 # * InnoDB
 #
 default_storage_engine  = InnoDB
 innodb_log_file_size    = 128M
-innodb_buffer_pool_size = {{ innodb_buffer_pool_size }}
+innodb_buffer_pool_size = {{ mysql_innodb_buffer_pool_size }}
 innodb_log_buffer_size  = 8M
 innodb_file_per_table   = 1
 innodb_open_files   = 400

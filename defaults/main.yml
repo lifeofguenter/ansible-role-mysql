@@ -1,7 +1,7 @@
 ---
 
-bind_address: 0.0.0.0
+mysql_bind_address: 0.0.0.0
 
-max_connections: 256
+mysql_max_connections: 256
 
-innodb_buffer_pool_size: "{{ (ansible_memtotal_mb * 0.5) | round | int }}M"
+mysql_innodb_buffer_pool_size: "{{ (ansible_memtotal_mb * 0.5) | round | int }}M"
