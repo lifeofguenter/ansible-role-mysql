@@ -35,7 +35,9 @@
     content: |
       [mysql*]
       user root
-    dest: /etc/munin/plugin-conf.d/mysql
+      env.mysqlopts ""
+      env.mysqluser root
+    dest: /etc/munin/plugin-conf.d/mysql_
     mode: 0644
   notify: restart_munin_node
   become: yes
