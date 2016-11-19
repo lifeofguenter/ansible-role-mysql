@@ -46,6 +46,13 @@
   when: mysqld_cnf.stat.exists == True
   notify: restart_mysql
 
+- name: patch mysql-systemd-start
+  lineinfile:
+    dest: /usr/share/mysql/mysql-systemd-start
+    regexp: "^\\s*MYSQLDATA=.*$"
+    line: "MYSQLDATA={{ mysql_datadir }}"
+  become: yes
+
 - name: check if datadir exists
   stat:
     path: "{{ mysql_datadir }}"
