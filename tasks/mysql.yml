@@ -40,7 +40,24 @@
     regexp: "^(\\s*{{ item }}\\s*=.*)$"
     state: absent
   with_items:
-    - "bind-address"
+    - bind-address
+    - datadir
+  become: yes
   when: mysqld_cnf.stat.exists == True
   notify: restart_mysql
+
+- name: check if datadir exists
+  stat:
+    path: "{{ mysql_datadir }}"
+  register: my_datadir
+
+- name: stop mysql for datadir move
+  service: name=mysql state=stopped
   become: yes
+  when: my_datadir.stat.exists == False
+
+- name: optionally move datadir
+  command: mv /var/lib/mysql {{ my_datadir }}
+  become: yes
+  when: my_datadir.stat.exists == False
+  notify: restart_mysql

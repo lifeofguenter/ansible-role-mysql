@@ -1,1 +1,1 @@
-localhost mysql_user=tradmin mysql_password=test
+localhost mysql_user=tradmin mysql_password=test mysql_datadir=/var/lib/mysql2
