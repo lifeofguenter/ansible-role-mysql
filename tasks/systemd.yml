@@ -2,17 +2,27 @@
 
 - name: Copy service file for customization
   copy: src=/lib/systemd/system/mysql.service dest=/etc/systemd/system/mysql.service remote_src=True
+  become: yes
   notify:
     - reload_systemd
     - restart_mysql
-  become: yes
 
 - name: Raise service limits
   lineinfile: dest=/etc/systemd/system/mysql.service regexp="^{{ item }}\s*=" line="{{ item }}=infinity" insertafter='^\[Service\]'
   with_items:
     - LimitNOFILE
     - LimitMEMLOCK
+  become: yes
   notify:
     - reload_systemd
     - restart_mysql
+
+- name: patch mysql-systemd-start
+  lineinfile:
+    dest: /usr/share/mysql/mysql-systemd-start
+    regexp: "^\\s*MYSQLDATA=.*$"
+    line: "MYSQLDATA={{ mysql_datadir }}"
   become: yes
+  notify:
+    - reload_systemd
+    - restart_mysql
