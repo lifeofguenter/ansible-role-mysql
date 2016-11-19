@@ -57,7 +57,7 @@
   when: my_datadir.stat.exists == False
 
 - name: optionally move datadir
-  command: mv /var/lib/mysql {{ my_datadir }}
+  command: mv /var/lib/mysql {{ mysql_datadir }}
   become: yes
   when: my_datadir.stat.exists == False
   notify: restart_mysql
