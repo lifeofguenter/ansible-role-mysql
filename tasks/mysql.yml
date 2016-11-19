@@ -28,3 +28,19 @@
   template: src=custom.cnf.j2 dest=/etc/mysql/conf.d/custom.cnf mode=0644
   notify: restart_mysql
   become: yes
+
+- name: check for mysqld.cnf
+  stat:
+    path: /etc/mysql/mysql.conf.d/mysqld.cnf
+  register: mysqld_cnf
+
+- name: disable stuff in mysqld.conf
+  lineinfile:
+    dest: /etc/mysql/mysql.conf.d/mysqld.cnf
+    regexp: "^(\s*{{ item }}\s*=.*)$"
+    state: absent
+  with_items:
+    - "bind-address"
+  when: mysqld_cnf.stat.exists == True
+  notify: restart_mysql
+  become: yes
