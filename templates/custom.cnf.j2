@@ -24,6 +24,8 @@ innodb_flush_method = O_DIRECT
 innodb_flush_log_at_trx_commit = 0
 innodb_thread_concurrency = 8
 
+innodb_lock_wait_timeout = {{ mysql_innodb_lock_wait_timeout }}
+
 #
 # * Character sets
 #
