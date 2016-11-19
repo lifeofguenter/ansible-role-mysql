@@ -12,6 +12,7 @@
      url: https://raw.githubusercontent.com/munin-monitoring/munin/master/plugins/node.d/mysql_
      dest: /usr/share/munin/plugins/mysql_
      mode: "a+x"
+     force: yes
   become: yes
 
 - name: add mysql_commands plugin
