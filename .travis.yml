@@ -30,7 +30,7 @@ install:
 script:
   - "ansible-playbook tests/test.yml -i tests/inventory --connection=local"
   - /etc/init.d/mysql status
-  - cat /var/log/mysql/error.log
+  - sudo cat /var/log/mysql/error.log
   - mysql -h127.0.0.1 -utradmin -ptest -e 'SELECT VERSION();'
 
 notifications:
