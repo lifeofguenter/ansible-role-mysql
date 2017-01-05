@@ -29,7 +29,7 @@ install:
 
 script:
   - "ansible-playbook tests/test.yml -i tests/inventory --connection=local"
-  - mysql -utradmin -ptest -e 'SELECT VERSION();'
+  - mysql -h127.0.0.1 -utradmin -ptest -e 'SELECT VERSION();'
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
