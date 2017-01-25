@@ -9,7 +9,10 @@
   become: yes
 
 - name: Add repository
-  apt_repository: repo="deb http://repo.mysql.com/apt/{{ ansible_distribution | lower }}/ {{ ansible_distribution_release }} mysql-5.7" state=present
+  apt_repository:
+    repo: "deb http://repo.mysql.com/apt/{{ ansible_distribution | lower }}/ {{ ansible_distribution_release }} mysql-5.7"
+    state: present
+    update_cache: yes
   become: yes
 
 - name: Install MySQL
