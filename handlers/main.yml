@@ -5,13 +5,19 @@
   become: yes
 
 - name: restart_mysql
-  service: name=mysql state=restarted
+  service:
+    name: mysql
+    state: restarted
   become: yes
 
 - name: restart_munin_node
-  service: name=munin-node state=restarted
+  service:
+    name: munin-node
+    state: restarted
   become: yes
 
 - name: restart_fail2ban
-  service: name=fail2ban state=restarted
+  service:
+    name: fail2ban
+    state: restarted
   become: yes

@@ -1,7 +1,11 @@
 ---
 
 - name: install dependencies
-  apt: name={{ item }} state=present update_cache=yes cache_valid_time=3600
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+    cache_valid_time: 3600
   with_items:
     - libdbd-mysql-perl
     - libcache-cache-perl
@@ -16,17 +20,26 @@
   become: yes
 
 - name: add mysql_commands plugin
-  file: src=/usr/share/munin/plugins/mysql_ dest=/etc/munin/plugins/mysql_commands state=link
+  file:
+    src: /usr/share/munin/plugins/mysql_
+    dest: /etc/munin/plugins/mysql_commands
+    state: link
   notify: restart_munin_node
   become: yes
 
 - name: add mysql_connections plugin
-  file: src=/usr/share/munin/plugins/mysql_ dest=/etc/munin/plugins/mysql_connections state=link
+  file:
+    src: /usr/share/munin/plugins/mysql_
+    dest: /etc/munin/plugins/mysql_connections
+    state: link
   notify: restart_munin_node
   become: yes
 
 - name: add mysql_network_traffic plugin
-  file: src=/usr/share/munin/plugins/mysql_ dest=/etc/munin/plugins/mysql_network_traffic state=link
+  file:
+    src: /usr/share/munin/plugins/mysql_
+    dest: /etc/munin/plugins/mysql_network_traffic
+    state: link
   notify: restart_munin_node
   become: yes
 

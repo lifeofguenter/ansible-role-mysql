@@ -1,0 +1,23 @@
+---
+
+- name: create zabbix HOME
+  file:
+    path: /var/lib/zabbix
+    state: directory
+    mode: 0755
+    owner: zabbix
+    group: zabbix
+  become: yes
+
+- name: add zabbix .my.cnf
+  copy:
+    content: |
+      [client]
+      host = 127.0.0.1
+      user = {{ mysql_user }}
+      password = {{ mysql_password }}
+    dest: /var/lib/zabbix/.my.cnf
+    mode: 0640
+    owner: zabbix
+    group: zabbix
+  become: yes
