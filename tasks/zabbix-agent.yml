@@ -1,7 +1,7 @@
 ---
 
 - set_fact:
-  mysql_log_group: zabbix
+    mysql_log_group: zabbix
 
 - name: create zabbix HOME
   file:
