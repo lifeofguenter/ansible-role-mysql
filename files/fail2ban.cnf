@@ -1,0 +1,2 @@
+[mysqld]
+log_warnings = 2

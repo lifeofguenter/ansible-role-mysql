@@ -8,6 +8,7 @@
   service:
     name: mysql
     state: restarted
+    enabled: yes
   become: yes
 
 - name: restart_munin_node

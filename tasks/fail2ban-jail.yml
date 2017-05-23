@@ -1,9 +1,17 @@
 ---
 
+- name: enable failed auth logging
+  copy:
+    src: fail2ban.cnf
+    dest: /etc/mysql/conf.d/fail2ban.cnf
+    mode: 0644
+  become: yes
+  notify: restart_mysql
+
 - name: add base config
   copy:
     src: jail.conf
     dest: /etc/fail2ban/jail.d/mysql.conf
     mode: 0644
-  notify: restart_fail2ban
   become: yes
+  notify: restart_fail2ban
