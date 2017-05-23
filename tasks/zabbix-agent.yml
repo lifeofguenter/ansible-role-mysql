@@ -1,5 +1,8 @@
 ---
 
+- set_fact:
+  mysql_log_group: zabbix
+
 - name: create zabbix HOME
   file:
     path: /var/lib/zabbix
@@ -19,5 +22,13 @@
     dest: /var/lib/zabbix/.my.cnf
     mode: 0640
     owner: zabbix
+    group: zabbix
+  become: yes
+
+- name: fix error.log perms
+  file:
+    path: /var/log/mysql/error.log
+    mode: 0640
+    owner: mysql
     group: zabbix
   become: yes

@@ -1,0 +1,10 @@
+---
+
+- name: add logrotate config
+  template:
+    src: logrotate.j2
+    dest: /etc/logrotate.d/mysql
+    owner: root
+    group: root
+    mode: 0644
+  become: yes

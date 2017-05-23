@@ -33,3 +33,6 @@
 
 - include: zabbix-agent.yml
   when: dpkg_zabbix_agent_check.rc == 0
+
+# run this as last as it relies on set_facts from zabbix-agent
+- include: logrotate.yml
