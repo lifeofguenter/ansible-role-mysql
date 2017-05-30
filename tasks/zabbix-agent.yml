@@ -25,13 +25,22 @@
     group: zabbix
   become: yes
 
-- name: fix error-log perms
+- name: fix error-log dir perms
+  file:
+    path: "{{ item }}"
+    mode: 0750
+    owner: mysql
+    group: zabbix
+  with_items:
+    - /var/log/mysql
+  become: yes
+
+- name: fix error-log file perms
   file:
     path: "{{ item }}"
     mode: 0640
     owner: mysql
     group: zabbix
   with_items:
-    - /var/log/mysql
     - /var/log/mysql/error.log
   become: yes
