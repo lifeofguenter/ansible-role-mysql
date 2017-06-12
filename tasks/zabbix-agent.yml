@@ -24,6 +24,7 @@
     owner: zabbix
     group: zabbix
   become: yes
+  notify: mysql_restart_zabbix_agent
 
 - name: fix error-log dir perms
   file:
@@ -34,6 +35,7 @@
   with_items:
     - /var/log/mysql
   become: yes
+  notify: mysql_restart_zabbix_agent
 
 - name: fix error-log file perms
   file:
@@ -44,3 +46,4 @@
   with_items:
     - /var/log/mysql/error.log
   become: yes
+  notify: mysql_restart_zabbix_agent

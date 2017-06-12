@@ -22,3 +22,9 @@
     name: fail2ban
     state: restarted
   become: yes
+
+- name: mysql_restart_zabbix_agent
+  service:
+    name: zabbix-agent
+    state: restarted
+  become: yes
