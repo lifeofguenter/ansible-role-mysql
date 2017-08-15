@@ -9,7 +9,7 @@ dist: trusty
 addons:
   apt:
     packages:
-    - python-pip
+    - python-setuptools
 
 before_install:
   # remove mysql
@@ -20,8 +20,15 @@ before_install:
   - "echo never | sudo tee /sys/kernel/mm/transparent_hugepage/defrag"
 
 install:
+  - sudo -H easy_install pip
+  # http://urllib3.readthedocs.io/en/latest/user-guide.html#ssl-py2
+  - sudo -H pip install -U pyOpenSSL cryptography idna certifi
+  - sudo -H pip install -U urllib3
+  # https://github.com/ansible/ansible/issues/23642#issuecomment-297469043
+  - sudo -H pip install -U ndg-httpsclient
+
   # Install ansible
-  - pip install ansible
+  - sudo -H pip install -U ansible
 
   # Check ansible version
   - ansible --version
@@ -31,8 +38,9 @@ install:
 
 script:
   - "ansible-playbook tests/test.yml -i tests/inventory --connection=local"
+  - "ansible-playbook tests/test.yml -i tests/inventory --connection=local"
   - sudo /etc/init.d/mysql status
-  - sudo cat /var/log/mysql/error.log
+  #- sudo cat /var/log/mysql/error.log
   - mysql -h127.0.0.1 -utradmin -ptest -e 'SELECT VERSION();'
 
 notifications:
