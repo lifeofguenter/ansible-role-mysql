@@ -14,7 +14,8 @@
 - name: raise service limits
   lineinfile:
     dest: /etc/systemd/system/mysql.service
-    regexp: "^{{ item }}\s*=" line="{{ item }}=infinity"
+    regexp: "^{{ item }}\\s*="
+    line: "{{ item }}=infinity"
     insertafter: '^\[Service\]'
   with_items:
     - LimitNOFILE
