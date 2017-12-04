@@ -32,6 +32,11 @@
     state: present
   become: yes
 
+- service:
+    name: mysql
+    state: started
+  become: yes
+
 - name: create admin user
   mysql_user:
     name: "{{ mysql_user }}"
