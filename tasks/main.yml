@@ -1,13 +1,13 @@
 ---
 
-- include: mysql.yml
+- import_tasks: mysql.yml
 
 - name: check if systemd is installed
   command: dpkg -L systemd
   register: dpkg_systemd_check
   ignore_errors: yes
 
-- include: systemd.yml
+- import_tasks: systemd.yml
   when: dpkg_systemd_check.rc == 0
 
 - name: check if munin-node is installed
@@ -15,7 +15,7 @@
   register: dpkg_munin_node_check
   ignore_errors: yes
 
-- include: munin-plugin.yml
+- import_tasks: munin-plugin.yml
   when: dpkg_munin_node_check.rc == 0
 
 - name: check if fail2ban is installed
@@ -23,7 +23,7 @@
   register: dpkg_fail2ban_check
   ignore_errors: yes
 
-- include: fail2ban-jail.yml
+- import_tasks: fail2ban-jail.yml
   when: dpkg_fail2ban_check.rc == 0
 
 - name: check if zabbix-agent is installed
@@ -31,8 +31,8 @@
   register: dpkg_zabbix_agent_check
   ignore_errors: yes
 
-- include: zabbix-agent.yml
+- import_tasks: zabbix-agent.yml
   when: dpkg_zabbix_agent_check.rc == 0
 
 # run this as last as it relies on set_facts from zabbix-agent
-- include: logrotate.yml
+- import_tasks: logrotate.yml

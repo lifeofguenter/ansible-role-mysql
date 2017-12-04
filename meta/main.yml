@@ -3,7 +3,7 @@ galaxy_info:
   description: Install MySQL (Oracle)
   company: weheartwebsites UG
   license: MIT
-  min_ansible_version: 2.0
+  min_ansible_version: 2.4
   platforms:
   - name: Ubuntu
     versions:
