@@ -7,8 +7,10 @@
     state: present
   become: yes
 
-- name: add apt-key
-  command: apt-key adv --keyserver pgp.mit.edu --recv-keys 5072E1F5
+- name: add mysql.com apt-key
+  apt_key:
+    keyserver: pool.sks-keyservers.net
+    id: 5072E1F5
   become: yes
 
 - name: add repository
