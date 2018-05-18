@@ -49,7 +49,7 @@
 
 - name: add custom.cnf
   template:
-    src: custom.cnf.j2
+    src: custom.cnf
     dest: /etc/mysql/conf.d/custom.cnf
     mode: 0644
   notify: restart_mysql
