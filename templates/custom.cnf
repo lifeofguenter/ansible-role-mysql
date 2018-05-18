@@ -34,9 +34,9 @@ innodb_lock_wait_timeout = {{ mysql_innodb_lock_wait_timeout }}
 # * Character sets
 #
 character-set-server = {{ mysql_charset }}
-collation-server = {{ mysql_charset }}_unicode_ci
+collation-server = {{ mysql_collation }}
 character_set_server = {{ mysql_charset }}
-collation_server = {{ mysql_charset }}_unicode_ci
+collation_server = {{ mysql_collation }}
 
 [client]
 default-character-set = {{ mysql_charset }}

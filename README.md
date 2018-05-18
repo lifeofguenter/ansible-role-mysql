@@ -13,22 +13,26 @@ _none_
 
 ```
 mysql_user: *required*
-```
 
-```
 mysql_password: *required*
-```
 
-```
 mysql_bind_address: 0.0.0.0
-```
 
-```
+mysql_charset: utf8mb4
+
+mysql_collation: "{{ mysql_charset }}_unicode_ci"
+
+mysql_datadir: /var/lib/mysql
+
 mysql_max_connections: 256
-```
 
-```
 mysql_innodb_buffer_pool_size: "{{ (ansible_memtotal_mb * 0.5) | round | int }}M"
+
+mysql_innodb_lock_wait_timeout: 50
+
+mysql_innodb_log_file_size: "128M"
+
+mysql_log_error_verbosity: 2
 ```
 
 ## Dependencies

@@ -2,7 +2,7 @@
 
 - name: add logrotate config
   template:
-    src: logrotate.j2
+    src: logrotate.conf
     dest: /etc/logrotate.d/mysql
     owner: root
     group: root
