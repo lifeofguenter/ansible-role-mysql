@@ -2,34 +2,35 @@
 
 - name: prerequisites
   apt:
-    name: python-mysqldb
-    cache_valid_time: 3600
+    name:
+      - python-pymysql
+      - python3-pymysql
     state: present
+    update_cache: yes
+    cache_valid_time: 3600
   become: yes
 
 - name: add mysql.com apt-key
   apt_key:
-    keyserver: pool.sks-keyservers.net
     id: 5072E1F5
+    url: https://d.peegeepee.com/A4A9406876FCBD3C456770C88C718D3B5072E1F5.asc
   become: yes
 
 - name: add repository
   apt_repository:
     repo: "deb http://repo.mysql.com/apt/{{ ansible_distribution | lower }}/ {{ ansible_distribution_release }} mysql-5.7"
     state: present
+  become: yes
+
+- name: install mysql packages
+  apt:
+    name:
+      - mysql-server
+      - mysql-client
+      - libmysqlclient-dev
+    state: present
     update_cache: yes
-  become: yes
-
-- name: install mysql
-  apt:
-    name: mysql-server
-    state: present
-  become: yes
-
-- name: install libmysqlclient-dev
-  apt:
-    name: libmysqlclient-dev
-    state: present
+    cache_valid_time: 3600
   become: yes
 
 - service:
@@ -43,8 +44,9 @@
     password: "{{ mysql_password }}"
     host: "%"
     priv: "*.*:ALL,GRANT"
-    login_user: root
     state: present
+    check_implicit_admin: yes
+    login_unix_socket: /var/run/mysqld/mysqld.sock
   become: yes
 
 - name: add custom.cnf
