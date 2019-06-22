@@ -1,34 +1,22 @@
 ---
 
-language: python
-python: "2.7"
-sudo: required
-dist: trusty
+dist: xenial
 
-# Install ansible
-addons:
-  apt:
-    packages:
-    - python-setuptools
+language: python
+python: "3.7"
+sudo: required
 
 before_install:
   # remove mysql
-  - "sudo apt-get remove --purge mysql-common mysql-server-5.5 mysql-server-core-5.5 mysql-client-5.5 mysql-client-core-5.5"
+  - "sudo apt-get remove --purge mysql-*"
   - "sudo apt-get autoremove --purge"
   - "sudo rm -rf /var/lib/mysql"
   - "echo never | sudo tee /sys/kernel/mm/transparent_hugepage/enabled"
   - "echo never | sudo tee /sys/kernel/mm/transparent_hugepage/defrag"
 
 install:
-  - sudo -H easy_install pip
-  # http://urllib3.readthedocs.io/en/latest/user-guide.html#ssl-py2
-  - sudo -H pip install -U pyOpenSSL cryptography idna certifi
-  - sudo -H pip install -U urllib3
-  # https://github.com/ansible/ansible/issues/23642#issuecomment-297469043
-  - sudo -H pip install -U ndg-httpsclient
-
   # Install ansible
-  - sudo -H pip install -U ansible
+  - pip install -U ansible
 
   # Check ansible version
   - ansible --version
