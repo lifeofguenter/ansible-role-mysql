@@ -1,5 +1,5 @@
 [mysqld]
-skip-name-resolve
+skip_name_resolve = ON
 max_connections = {{ mysql_max_connections }}
 table_open_cache = 2048
 datadir = {{ mysql_datadir }}
@@ -9,7 +9,8 @@ log_output = FILE
 slow_query_log_file = /var/log/mysql/mysql-slow.log
 long_query_time = 4
 bind-address = {{ mysql_bind_address }}
-max_allowed_packet=64M
+max_allowed_packet = 64M
+require_secure_transport = ON
 
 #
 # * InnoDB
