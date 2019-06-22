@@ -2,7 +2,9 @@
 
 - name: prerequisites
   apt:
-    name: python3-pymysql
+    name:
+      - python-pymysql
+      - python3-pymysql
     state: present
     update_cache: yes
     cache_valid_time: 3600
