@@ -45,6 +45,7 @@
     host: "%"
     priv: "*.*:ALL,GRANT"
     state: present
+    check_implicit_admin: yes
   become: yes
 
 - name: add custom.cnf
