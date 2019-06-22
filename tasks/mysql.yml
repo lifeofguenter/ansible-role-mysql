@@ -46,6 +46,7 @@
     priv: "*.*:ALL,GRANT"
     state: present
     check_implicit_admin: yes
+    login_unix_socket: /var/run/mysqld/mysqld.sock
   become: yes
 
 - name: add custom.cnf
