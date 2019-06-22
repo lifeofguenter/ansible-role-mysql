@@ -20,6 +20,14 @@
   apt_repository:
     repo: "deb http://repo.mysql.com/apt/{{ ansible_distribution | lower }}/ {{ ansible_distribution_release }} mysql-5.7"
     state: present
+  when: not ansible_distribution_release == 'buster'
+  become: yes
+
+- name: add repository
+  apt_repository:
+    repo: "deb http://repo.mysql.com/apt/{{ ansible_distribution | lower }}/ stretch mysql-5.7"
+    state: present
+  when: ansible_distribution_release == 'buster'
   become: yes
 
 - name: install mysql packages
