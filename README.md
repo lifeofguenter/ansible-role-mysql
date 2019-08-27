@@ -33,6 +33,8 @@ mysql_innodb_lock_wait_timeout: 50
 mysql_innodb_log_file_size: "128M"
 
 mysql_log_error_verbosity: 2
+
+mysql_require_secure_transport: On
 ```
 
 ## Dependencies
