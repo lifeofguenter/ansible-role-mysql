@@ -2,37 +2,34 @@
 
 - import_tasks: mysql.yml
 
-- name: check if systemd is installed
-  command: dpkg -L systemd
-  register: dpkg_systemd_check
-  ignore_errors: yes
-
 - import_tasks: systemd.yml
-  when: dpkg_systemd_check.rc == 0
 
 - name: check if munin-node is installed
   command: dpkg -L munin-node
   register: dpkg_munin_node_check
+  changed_when: no
   ignore_errors: yes
 
 - import_tasks: munin-plugin.yml
-  when: dpkg_munin_node_check.rc == 0
+  when: dpkg_munin_node_check is success
 
 - name: check if fail2ban is installed
   command: dpkg -L fail2ban
   register: dpkg_fail2ban_check
+  changed_when: no
   ignore_errors: yes
 
 - import_tasks: fail2ban-jail.yml
-  when: dpkg_fail2ban_check.rc == 0
+  when: dpkg_fail2ban_check is success
 
 - name: check if zabbix-agent is installed
   command: dpkg -L zabbix-agent
   register: dpkg_zabbix_agent_check
+  changed_when: no
   ignore_errors: yes
 
 - import_tasks: zabbix-agent.yml
-  when: dpkg_zabbix_agent_check.rc == 0
+  when: dpkg_zabbix_agent_check is success
 
 # run this as last as it relies on set_facts from zabbix-agent
 - import_tasks: logrotate.yml

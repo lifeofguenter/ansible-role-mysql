@@ -1,6 +1,7 @@
 ---
 
-- set_fact:
+- name: allow zabbix to read logs
+  set_fact:
     mysql_log_group: zabbix
 
 - name: create zabbix HOME

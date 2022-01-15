@@ -1,9 +1,10 @@
-[![Build Status](https://travis-ci.org/lifeofguenter/ansible-role-oracle-mysql.svg?branch=master)](https://travis-ci.org/lifeofguenter/ansible-role-oracle-mysql)
+# Ansible Role for MySQL
 
-# Ansible Role for MySQL (Oracle)
+[![Build Status](https://travis-ci.com/lifeofguenter/ansible-role-mysql.svg?branch=main)](https://travis-ci.com/lifeofguenter/ansible-role-mysql)
 
-This ansible role will install MySQL (Oracle) and apply some "sane" production settings.
-If munin and/or fail2ban are installed, additional tasks will run accordingly to activate them for MySQL as well.
+This ansible role will install MySQL and apply some "sane" production settings.
+If munin or fail2ban are installed, additional tasks will run accordingly to
+enable them for MySQL as well.
 
 ## Requirements
 
@@ -16,7 +17,7 @@ mysql_user: *required*
 
 mysql_password: *required*
 
-mysql_bind_address: 0.0.0.0
+mysql_bind_address: 127.0.0.1
 
 mysql_charset: utf8mb4
 
@@ -35,6 +36,8 @@ mysql_innodb_log_file_size: "128M"
 mysql_log_error_verbosity: 2
 
 mysql_require_secure_transport: ON
+
+mysql_version: "8.0"
 ```
 
 ## Dependencies
@@ -51,8 +54,15 @@ _none_
 
 ## License
 
-MIT
+[MIT](LICENSE)
 
 ## Author Information
 
-Gunter Grodotzki <gunter@grodotzki.co.za>
+Günter Grodotzki <gunter@grodotzki.com>
+
+* switch to 5.7 Debian < 11 / Ubuntu < 20
+* fully switch to systemd
+* fix systemd
+
+libmysqlclient20
+libmysqlclient21
