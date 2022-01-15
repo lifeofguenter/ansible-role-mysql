@@ -11,6 +11,7 @@ long_query_time = 4
 bind_address = {{ mysql_bind_address }}
 max_allowed_packet = 64M
 require_secure_transport = {{ mysql_require_secure_transport }}
+tls_version = TLSv1.2,TLSv1.3
 
 #
 # * InnoDB
@@ -27,7 +28,9 @@ innodb_flush_neighbors = 0
 innodb_flush_method = O_DIRECT
 innodb_flush_log_at_trx_commit = 0
 innodb_thread_concurrency = 8
+{% if mysql_version is version('8.0', '<') %}
 innodb_large_prefix = 1
+{% endif %}
 innodb_lock_wait_timeout = {{ mysql_innodb_lock_wait_timeout }}
 
 #
