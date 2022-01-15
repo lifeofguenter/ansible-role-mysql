@@ -2,9 +2,7 @@
 
 - name: prerequisites
   apt:
-    name:
-      - python-pymysql
-      - python3-pymysql
+    name: python3-pymysql
     state: present
     update_cache: yes
     cache_valid_time: 3600
@@ -18,7 +16,7 @@
 
 - name: add repository
   apt_repository:
-    repo: "deb http://repo.mysql.com/apt/{{ ansible_distribution | lower }}/ {{ ansible_distribution_release }} mysql-5.7 mysql-tools"
+    repo: deb http://repo.mysql.com/apt/{{ ansible_distribution | lower }}/ {{ ansible_distribution_release }} mysql-{{ mysql_version }} mysql-tools
     state: present
   become: yes
 
@@ -33,13 +31,14 @@
     cache_valid_time: 3600
   become: yes
 
-- service:
+- name: ensure mysql is running
+  ansible.builtin.systemd:
     name: mysql
     state: started
   become: yes
 
 - name: create admin user
-  mysql_user:
+  community.mysql.mysql_user:
     name: "{{ mysql_user }}"
     password: "{{ mysql_password }}"
     host: "%"
@@ -47,6 +46,7 @@
     state: present
     check_implicit_admin: yes
     login_unix_socket: /var/run/mysqld/mysqld.sock
+  no_log: yes
   become: yes
 
 - name: add custom.cnf
@@ -71,7 +71,7 @@
     - bind-address
     - datadir
   become: yes
-  when: mysqld_cnf.stat.exists == True
+  when: mysqld_cnf.stat.exists
   notify: restart_mysql
 
 - name: check if datadir exists
@@ -80,14 +80,14 @@
   register: my_datadir
 
 - name: stop mysql for datadir move
-  service:
+  ansible.builtin.systemd:
     name: mysql
     state: stopped
   become: yes
-  when: my_datadir.stat.exists == False
+  when: not my_datadir.stat.exists
 
 - name: optionally move datadir
   command: cp -ar /var/lib/mysql {{ mysql_datadir }}
   become: yes
-  when: my_datadir.stat.exists == False
+  when: not my_datadir.stat.exists
   notify: restart_mysql

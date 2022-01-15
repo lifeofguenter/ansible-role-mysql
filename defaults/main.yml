@@ -1,10 +1,11 @@
 ---
 
-mysql_bind_address: 0.0.0.0
+mysql_bind_address: 127.0.0.1
 
 mysql_charset: utf8mb4
 
-mysql_collation: "{{ mysql_charset }}_unicode_ci"
+mysql_collation: "{{ mysql_charset }}_0900_ai_ci"
+#mysql_collation: "{{ mysql_charset }}_unicode_520_ci"
 
 mysql_datadir: /var/lib/mysql
 
@@ -19,3 +20,6 @@ mysql_innodb_log_file_size: "128M"
 mysql_log_error_verbosity: 2
 
 mysql_require_secure_transport: ON
+
+mysql_version: "8.0"
+#mysql_version: "5.7"

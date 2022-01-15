@@ -1,16 +1,21 @@
+---
+
 galaxy_info:
-  author: Gunter Grodotzki
-  description: Installs MySQL (Oracle)
+  role_name: mysql
+  namespace: lifeofguenter
+  author: Günter Grodotzki
+  description: Installs & configures MySQL on Debian-like systems.
   license: MIT
-  min_ansible_version: 2.8
+  min_ansible_version: '2.10'
   platforms:
   - name: Ubuntu
     versions:
-      - xenial
+      - focal
+      - bionic
   - name: Debian
     versions:
+      - bullseye
       - buster
-      - stretch
   galaxy_tags:
     - database
     - sql
