@@ -38,7 +38,7 @@
   become: yes
 
 - name: create admin user
-  mysql_user:
+  community.mysql.mysql_user:
     name: "{{ mysql_user }}"
     password: "{{ mysql_password }}"
     host: "%"
@@ -46,6 +46,7 @@
     state: present
     check_implicit_admin: yes
     login_unix_socket: /var/run/mysqld/mysqld.sock
+  no_log: yes
   become: yes
 
 - name: add custom.cnf

@@ -11,6 +11,8 @@ long_query_time = 4
 bind_address = {{ mysql_bind_address }}
 max_allowed_packet = 64M
 require_secure_transport = {{ mysql_require_secure_transport }}
+group_replication_recovery_tls_version = TLSv1.2,TLSv1.3
+admin_tls_version = TLSv1.2,TLSv1.3
 tls_version = TLSv1.2,TLSv1.3
 
 #

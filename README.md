@@ -8,7 +8,12 @@ enable them for MySQL as well.
 
 ## Requirements
 
-_none_
+In your `requirements.yml`:
+
+```yaml
+collections:
+  - name: community.mysql
+```
 
 ## Role Variables
 
@@ -49,7 +54,7 @@ _none_
 ```
 - hosts: servers
   roles:
-    - { role: lifeofguenter.oracle-mysql }
+    - src: lifeofguenter.oracle-mysql
 ```
 
 ## License
@@ -59,10 +64,3 @@ _none_
 ## Author Information
 
 Günter Grodotzki <gunter@grodotzki.com>
-
-* switch to 5.7 Debian < 11 / Ubuntu < 20
-* fully switch to systemd
-* fix systemd
-
-libmysqlclient20
-libmysqlclient21
