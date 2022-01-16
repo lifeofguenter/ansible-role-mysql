@@ -9,7 +9,7 @@ log_output = FILE
 slow_query_log_file = /var/log/mysql/mysql-slow.log
 long_query_time = 4
 bind_address = {{ mysql_bind_address }}
-{% if mysql_version is version('8.0', '<') %}
+{% if mysql_version is version('8.0', '>=') %}
 mysqlx_bind_address = {{ mysql_bind_address }}
 {% endif %}
 max_allowed_packet = 64M
