@@ -41,6 +41,7 @@ script:
   - sudo cat /var/log/mysql/error.log
   - mysql --version
   - mysql -h127.0.0.1 -utradmin -ptest -e 'SELECT VERSION();'
+  - mysql -h127.0.0.1 -utradmin -ptest -e 'SHOW DATABASES;'
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/

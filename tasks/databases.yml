@@ -1,0 +1,7 @@
+---
+
+- name: Create databases
+  community.mysql.mysql_db:
+    name: mysql_databases
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+  become: yes
