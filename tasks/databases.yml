@@ -1,5 +1,17 @@
 ---
 
+- name: wait for mysql-port to be open
+  ansible.builtin.wait_for:
+    port: 3306
+
+- name: wait for mysql to be ready
+  community.mysql.mysql_query:
+    query: SELECT VERSION()
+  register: _mysql_tmp_select_version
+  until: _mysql_tmp_select_version is success
+  retries: 60
+  delay: 5
+
 - name: Create databases
   community.mysql.mysql_db:
     name: mysql_databases
