@@ -10,8 +10,11 @@
 
 - name: add mysql.com apt-key
   apt_key:
-    id: 5072E1F5
-    url: https://d.peegeepee.com/A4A9406876FCBD3C456770C88C718D3B5072E1F5.asc
+    id: "{{ item }}"
+    url: https://d.peegeepee.com/{{ item }}.asc
+  with_items:
+    - 859BE8D7C586F538430B19C2467B942D3A79BD29
+    - A4A9406876FCBD3C456770C88C718D3B5072E1F5
   become: yes
 
 - name: add repository
