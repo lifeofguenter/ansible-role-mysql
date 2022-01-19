@@ -1,0 +1,15 @@
+---
+
+- name: stop mysql for datadir move
+  ansible.builtin.systemd:
+    name: mysql
+    state: stopped
+  become: yes
+
+- name: optionally move datadir
+  command: cp -ar /var/lib/mysql {{ mysql_datadir }}
+  become: yes
+  notify: restart_mysql
+
+- name: force restart
+  meta: flush_handlers

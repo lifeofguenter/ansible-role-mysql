@@ -4,6 +4,14 @@
 
 - import_tasks: systemd.yml
 
+- name: check if datadir exists
+  stat:
+    path: "{{ mysql_datadir }}"
+  register: my_datadir
+
+- import_tasks: datadir.yml
+  when: not my_datadir.stat.exists
+
 - name: check if munin-node is installed
   command: dpkg -L munin-node
   register: dpkg_munin_node_check

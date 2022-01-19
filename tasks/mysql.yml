@@ -76,21 +76,3 @@
   become: yes
   when: mysqld_cnf.stat.exists
   notify: restart_mysql
-
-- name: check if datadir exists
-  stat:
-    path: "{{ mysql_datadir }}"
-  register: my_datadir
-
-- name: stop mysql for datadir move
-  ansible.builtin.systemd:
-    name: mysql
-    state: stopped
-  become: yes
-  when: not my_datadir.stat.exists
-
-- name: optionally move datadir
-  command: cp -ar /var/lib/mysql {{ mysql_datadir }}
-  become: yes
-  when: not my_datadir.stat.exists
-  notify: restart_mysql

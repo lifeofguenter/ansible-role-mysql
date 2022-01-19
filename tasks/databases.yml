@@ -7,13 +7,15 @@
 - name: wait for mysql to be ready
   community.mysql.mysql_query:
     query: SELECT VERSION()
+    login_unix_socket: /var/run/mysqld/mysqld.sock
   register: _mysql_tmp_select_version
   until: _mysql_tmp_select_version is success
   retries: 60
   delay: 5
+  become: yes
 
 - name: Create databases
   community.mysql.mysql_db:
-    name: mysql_databases
+    name: "{{ mysql_databases }}"
     login_unix_socket: /var/run/mysqld/mysqld.sock
   become: yes
