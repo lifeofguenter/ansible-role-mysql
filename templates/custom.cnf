@@ -11,11 +11,11 @@ long_query_time = 4
 bind_address = {{ mysql_bind_address }}
 {% if mysql_version is version('8.0', '>=') %}
 mysqlx_bind_address = {{ mysqlx_bind_address }}
-{% endif %}
-max_allowed_packet = 64M
-require_secure_transport = {{ mysql_require_secure_transport }}
 admin_tls_version = TLSv1.2,TLSv1.3
+{% endif %}
 tls_version = TLSv1.2,TLSv1.3
+require_secure_transport = {{ mysql_require_secure_transport }}
+max_allowed_packet = 64M
 
 #
 # * InnoDB
