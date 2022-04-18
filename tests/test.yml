@@ -10,5 +10,6 @@
       - foo
       - bar
 
-  roles:
-    - ansible-role-mysql
+  tasks:
+    - ansible.builtin.import_role:
+        name: project
