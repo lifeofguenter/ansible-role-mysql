@@ -20,7 +20,10 @@ jobs:
       - run: ansible-galaxy collection install community.mysql
 
       - checkout
+
       - run: printf '[defaults]\nroles_path=../' > ansible.cfg
+
+      - run: ansible-lint
       - run: ansible-playbook tests/test.yml -i tests/inventory --connection=local
       - run: ansible-playbook tests/test.yml -i tests/inventory --connection=local
 

@@ -11,7 +11,7 @@
 - name: add mysql.com apt-key
   ansible.builtin.apt_key:
     id: 859BE8D7C586F538430B19C2467B942D3A79BD29
-    keyserver: keys.openpgp.org
+    keyserver: keyserver.ubuntu.com
   become: yes
 
 - name: add repository
