@@ -1,0 +1,42 @@
+---
+
+version: 2.1
+
+jobs:
+
+  build:
+    machine:
+      # https://circleci.com/docs/2.0/configuration-reference/#machine
+      image: ubuntu-2004:202201-02
+    environment:
+      ANSIBLE_PYTHON_INTERPRETER: /usr/bin/python3
+
+    steps:
+      - run: sudo apt remove --assume-yes --purge apparmor
+      - run: pip3 install ansible ansible-lint
+
+      - run: ansible --version
+      - run: ansible-lint --version
+
+      - checkout
+
+      - run: printf '[defaults]\nroles_path=../' > ansible.cfg
+      - run: ansible-lint
+
+      # dependencies
+      - run: ansible-galaxy collection install community.mysql
+
+      - run: ansible-playbook tests/test.yml -i tests/inventory --connection=local
+
+      - run:
+          command: sudo journalctl --no-pager --unit=mysql
+          when: on_fail
+      - run:
+          command: sudo cat /var/log/mysql/error.log
+          when: on_fail
+
+      - run: ansible-playbook tests/test.yml -i tests/inventory --connection=local
+
+      - run: mysql --version
+      - run: mysql -h127.0.0.1 -utradmin -ptest -e 'SELECT VERSION();'
+      - run: mysql -h127.0.0.1 -utradmin -ptest -e 'SHOW DATABASES;'

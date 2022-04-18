@@ -1,7 +1,7 @@
 ---
 
 - name: install dependencies
-  apt:
+  ansible.builtin.apt:
     name:
       - libdbd-mysql-perl
       - libcache-cache-perl
@@ -11,7 +11,7 @@
   become: yes
 
 - name: fix munin plugin for mysql 5.7
-  get_url:
+  ansible.builtin.get_url:
      url: https://raw.githubusercontent.com/munin-monitoring/munin/master/plugins/node.d/mysql_
      dest: /usr/share/munin/plugins/mysql_
      mode: "a+x"
@@ -19,7 +19,7 @@
   become: yes
 
 - name: add mysql_commands plugin
-  file:
+  ansible.builtin.file:
     src: /usr/share/munin/plugins/mysql_
     dest: /etc/munin/plugins/mysql_commands
     state: link
@@ -27,7 +27,7 @@
   become: yes
 
 - name: add mysql_connections plugin
-  file:
+  ansible.builtin.file:
     src: /usr/share/munin/plugins/mysql_
     dest: /etc/munin/plugins/mysql_connections
     state: link
@@ -35,7 +35,7 @@
   become: yes
 
 - name: add mysql_network_traffic plugin
-  file:
+  ansible.builtin.file:
     src: /usr/share/munin/plugins/mysql_
     dest: /etc/munin/plugins/mysql_network_traffic
     state: link
@@ -43,7 +43,7 @@
   become: yes
 
 - name: add munin plugin-conf
-  copy:
+  ansible.builtin.copy:
     content: |
       [mysql*]
       user root

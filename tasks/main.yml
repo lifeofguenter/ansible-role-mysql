@@ -1,46 +1,46 @@
 ---
 
-- import_tasks: mysql.yml
+- ansible.builtin.import_tasks: mysql.yml
 
-- import_tasks: systemd.yml
+- ansible.builtin.import_tasks: systemd.yml
 
 - name: check if datadir exists
-  stat:
+  ansible.builtin.stat:
     path: "{{ mysql_datadir }}"
   register: my_datadir
 
-- import_tasks: datadir.yml
+- ansible.builtin.import_tasks: datadir.yml
   when: not my_datadir.stat.exists
 
 - name: check if munin-node is installed
-  command: dpkg -L munin-node
+  ansible.builtin.command: dpkg -L munin-node
   register: dpkg_munin_node_check
   changed_when: no
   ignore_errors: yes
 
-- import_tasks: munin-plugin.yml
+- ansible.builtin.import_tasks: munin-plugin.yml
   when: dpkg_munin_node_check is success
 
 - name: check if fail2ban is installed
-  command: dpkg -L fail2ban
+  ansible.builtin.command: dpkg -L fail2ban
   register: dpkg_fail2ban_check
   changed_when: no
   ignore_errors: yes
 
-- import_tasks: fail2ban-jail.yml
+- ansible.builtin.import_tasks: fail2ban-jail.yml
   when: dpkg_fail2ban_check is success
 
 - name: check if zabbix-agent is installed
-  command: dpkg -L zabbix-agent
+  ansible.builtin.command: dpkg -L zabbix-agent
   register: dpkg_zabbix_agent_check
   changed_when: no
   ignore_errors: yes
 
-- import_tasks: zabbix-agent.yml
+- ansible.builtin.import_tasks: zabbix-agent.yml
   when: dpkg_zabbix_agent_check is success
 
 # run this as last as it relies on set_facts from zabbix-agent
-- import_tasks: logrotate.yml
+- ansible.builtin.import_tasks: logrotate.yml
 
-- import_tasks: databases.yml
+- ansible.builtin.import_tasks: databases.yml
   when: mysql_databases is defined and mysql_databases | length > 0

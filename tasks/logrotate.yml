@@ -1,7 +1,7 @@
 ---
 
 - name: add logrotate config
-  template:
+  ansible.builtin.template:
     src: logrotate.conf
     dest: /etc/logrotate.d/mysql
     owner: root

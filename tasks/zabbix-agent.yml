@@ -1,11 +1,11 @@
 ---
 
 - name: allow zabbix to read logs
-  set_fact:
+  ansible.builtin.set_fact:
     mysql_log_group: zabbix
 
 - name: create zabbix HOME
-  file:
+  ansible.builtin.file:
     path: /var/lib/zabbix
     state: directory
     mode: 0755
@@ -14,7 +14,7 @@
   become: yes
 
 - name: add zabbix .my.cnf
-  copy:
+  ansible.builtin.copy:
     content: |
       [client]
       host = 127.0.0.1
@@ -28,7 +28,7 @@
   notify: mysql_restart_zabbix_agent
 
 - name: fix error-log dir perms
-  file:
+  ansible.builtin.file:
     path: "{{ item }}"
     mode: 0750
     owner: mysql
@@ -39,7 +39,7 @@
   notify: mysql_restart_zabbix_agent
 
 - name: fix error-log file perms
-  file:
+  ansible.builtin.file:
     path: "{{ item }}"
     mode: 0640
     owner: mysql

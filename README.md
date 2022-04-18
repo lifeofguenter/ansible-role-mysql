@@ -1,6 +1,6 @@
 # Ansible Role for MySQL
 
-[![Build Status](https://travis-ci.com/lifeofguenter/ansible-role-mysql.svg?branch=main)](https://travis-ci.com/lifeofguenter/ansible-role-mysql)
+[![CircleCI](https://circleci.com/gh/lifeofguenter/ansible-role-mysql/tree/main.svg?style=svg)](https://circleci.com/gh/lifeofguenter/ansible-role-mysql/tree/main)
 
 This ansible role will install MySQL and apply some "sane" production settings.
 If munin or fail2ban are installed, additional tasks will run accordingly to
