@@ -11,6 +11,10 @@ jobs:
     environment:
       ANSIBLE_PYTHON_INTERPRETER: /usr/bin/python3
 
+    filters:
+      tags:
+        only: /^\d+\.\d+\.\d+$/
+
     steps:
       - run: sudo apt remove --assume-yes --purge apparmor
       - run: pip3 install ansible ansible-lint
@@ -18,13 +22,14 @@ jobs:
       - run: ansible --version
       - run: ansible-lint --version
 
-      - run: ansible-galaxy collection install community.mysql
-
       - checkout
 
       - run: printf '[defaults]\nroles_path=../' > ansible.cfg
-
       - run: ansible-lint
+
+      # dependencies
+      - run: ansible-galaxy collection install community.mysql
+
       - run: ansible-playbook tests/test.yml -i tests/inventory --connection=local
 
       - run:
