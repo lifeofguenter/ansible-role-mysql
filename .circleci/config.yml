@@ -25,10 +25,16 @@ jobs:
 
       - run: ansible-lint
       - run: ansible-playbook tests/test.yml -i tests/inventory --connection=local
+
+      - run:
+          command: sudo journalctl --unit=mysql
+          when: on_fail
+      - run:
+          command: sudo cat /var/log/mysql/error.log
+          when: on_fail
+
       - run: ansible-playbook tests/test.yml -i tests/inventory --connection=local
 
-      - run: sudo journalctl --unit=mysql
-      - run: sudo cat /var/log/mysql/error.log
       - run: mysql --version
       - run: mysql -h127.0.0.1 -utradmin -ptest -e 'SELECT VERSION();'
       - run: mysql -h127.0.0.1 -utradmin -ptest -e 'SHOW DATABASES;'
