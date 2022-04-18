@@ -11,7 +11,7 @@
 - name: add mysql.com apt-key
   apt_key:
     id: "{{ item }}"
-    url: https://d.peegeepee.com/{{ item }}.asc
+    url: https://keys.openpgp.org/vks/v1/by-fingerprint/{{ item }}
   with_items:
     - 859BE8D7C586F538430B19C2467B942D3A79BD29
   become: yes
