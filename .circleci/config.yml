@@ -11,10 +11,6 @@ jobs:
     environment:
       ANSIBLE_PYTHON_INTERPRETER: /usr/bin/python3
 
-    filters:
-      tags:
-        only: /^\d+\.\d+\.\d+$/
-
     steps:
       - run: sudo apt remove --assume-yes --purge apparmor
       - run: pip3 install ansible ansible-lint
