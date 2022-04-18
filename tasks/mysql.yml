@@ -1,7 +1,7 @@
 ---
 
 - name: prerequisites
-  apt:
+  ansible.builtin.apt:
     name: python3-pymysql
     state: present
     update_cache: yes
@@ -9,21 +9,19 @@
   become: yes
 
 - name: add mysql.com apt-key
-  apt_key:
-    id: "{{ item }}"
-    url: https://keys.openpgp.org/vks/v1/by-fingerprint/{{ item }}
-  with_items:
-    - 859BE8D7C586F538430B19C2467B942D3A79BD29
+  ansible.builtin.apt_key:
+    id: 859BE8D7C586F538430B19C2467B942D3A79BD29
+    keyserver: keys.openpgp.org
   become: yes
 
 - name: add repository
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: deb http://repo.mysql.com/apt/{{ ansible_distribution | lower }}/ {{ ansible_distribution_release }} mysql-{{ mysql_version }} mysql-tools
     state: present
   become: yes
 
 - name: install mysql packages
-  apt:
+  ansible.builtin.apt:
     name:
       - mysql-server
       - mysql-client
@@ -52,7 +50,7 @@
   become: yes
 
 - name: add custom.cnf
-  template:
+  ansible.builtin.template:
     src: custom.cnf
     dest: /etc/mysql/conf.d/custom.cnf
     mode: 0644
@@ -60,12 +58,12 @@
   become: yes
 
 - name: check for mysqld.cnf
-  stat:
+  ansible.builtin.stat:
     path: /etc/mysql/mysql.conf.d/mysqld.cnf
   register: mysqld_cnf
 
 - name: disable stuff in mysqld.conf
-  lineinfile:
+  ansible.builtin.lineinfile:
     dest: /etc/mysql/mysql.conf.d/mysqld.cnf
     regexp: "^(\\s*{{ item }}\\s*=.*)$"
     state: absent

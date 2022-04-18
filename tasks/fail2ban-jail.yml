@@ -1,7 +1,7 @@
 ---
 
 - name: add base config
-  copy:
+  ansible.builtin.copy:
     src: jail.conf
     dest: /etc/fail2ban/jail.d/mysql.conf
     mode: 0644

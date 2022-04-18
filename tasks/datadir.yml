@@ -7,10 +7,10 @@
   become: yes
 
 - name: optionally move datadir
-  command: cp -ar /var/lib/mysql {{ mysql_datadir }}
+  ansible.builtin.command: cp -ar /var/lib/mysql {{ mysql_datadir }}
   become: yes
   changed_when: true
   notify: restart_mysql
 
 - name: force restart
-  meta: flush_handlers
+  ansible.builtin.meta: flush_handlers
