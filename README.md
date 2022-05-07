@@ -33,7 +33,6 @@ mysql_innodb_buffer_pool_size: "{{ (ansible_memtotal_mb * 0.5) | round | int }}M
 mysql_innodb_lock_wait_timeout: 50
 mysql_innodb_log_file_size: "128M"
 
-mysql_datadir: /var/lib/mysql
 mysql_max_connections: 256
 mysql_log_error_verbosity: 2
 mysql_require_secure_transport: ON

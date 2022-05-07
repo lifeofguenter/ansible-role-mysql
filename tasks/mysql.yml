@@ -69,7 +69,6 @@
     state: absent
   with_items:
     - bind-address
-    - datadir
   become: yes
   when: mysqld_cnf.stat.exists
   notify: restart_mysql

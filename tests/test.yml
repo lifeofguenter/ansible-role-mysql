@@ -5,7 +5,6 @@
   vars:
     mysql_user: tradmin
     mysql_password: test
-    mysql_datadir: /var/lib/mysql2
     mysql_databases:
       - foo
       - bar
