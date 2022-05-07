@@ -13,6 +13,7 @@ jobs:
 
     steps:
       - run: sudo apt remove --assume-yes --purge apparmor
+      - run: sudo apt install --assume-yes net-tools
       - run: pip3 install ansible ansible-lint
 
       - run: ansible --version
@@ -40,3 +41,4 @@ jobs:
       - run: mysql --version
       - run: mysql -h127.0.0.1 -utradmin -ptest -e 'SELECT VERSION();'
       - run: mysql -h127.0.0.1 -utradmin -ptest -e 'SHOW DATABASES;'
+      - run: netstat -lnp
