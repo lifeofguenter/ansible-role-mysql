@@ -12,6 +12,7 @@ jobs:
       ANSIBLE_PYTHON_INTERPRETER: /usr/bin/python3
 
     steps:
+      - run: sudo apt-get update
       - run: sudo apt remove --assume-yes --purge apparmor
       - run: sudo apt install --assume-yes net-tools
       - run: pip3 install ansible ansible-lint
