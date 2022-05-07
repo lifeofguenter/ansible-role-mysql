@@ -9,7 +9,7 @@
 
 - name: copy system override
   ansible.builtin.template:
-    src: override.ini
+    src: override.service
     dest: /etc/systemd/system/mysql.service.d/override.conf
     mode: '0644'
   become: yes

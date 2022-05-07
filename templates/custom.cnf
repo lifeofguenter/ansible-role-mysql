@@ -10,6 +10,11 @@ slow_query_log_file = /var/log/mysql/mysql-slow.log
 long_query_time = 4
 bind_address = {{ mysql_bind_address }}
 {% if mysql_version is version('8.0', '>=') %}
+{% if mysqlx_disable %}
+mysqlx = OFF
+{% else %}
+mysqlx = ON
+{% endif %}
 mysqlx_bind_address = {{ mysqlx_bind_address }}
 admin_tls_version = TLSv1.2,TLSv1.3
 {% endif %}

@@ -12,7 +12,10 @@ jobs:
       ANSIBLE_PYTHON_INTERPRETER: /usr/bin/python3
 
     steps:
+      - run: sudo rm /etc/apt/sources.list.d/google.list /etc/apt/sources.list.d/heroku.list
+      - run: sudo apt-get update
       - run: sudo apt remove --assume-yes --purge apparmor
+      - run: sudo apt install --assume-yes net-tools
       - run: pip3 install ansible ansible-lint
 
       - run: ansible --version
@@ -40,3 +43,4 @@ jobs:
       - run: mysql --version
       - run: mysql -h127.0.0.1 -utradmin -ptest -e 'SELECT VERSION();'
       - run: mysql -h127.0.0.1 -utradmin -ptest -e 'SHOW DATABASES;'
+      - run: netstat -lnp
