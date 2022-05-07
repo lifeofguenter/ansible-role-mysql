@@ -4,14 +4,6 @@
 
 - ansible.builtin.import_tasks: systemd.yml
 
-- name: check if datadir exists
-  ansible.builtin.stat:
-    path: "{{ mysql_datadir }}"
-  register: my_datadir
-
-- ansible.builtin.import_tasks: datadir.yml
-  when: not my_datadir.stat.exists
-
 - name: check if munin-node is installed
   ansible.builtin.command: dpkg -L munin-node
   register: dpkg_munin_node_check

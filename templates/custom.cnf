@@ -2,7 +2,6 @@
 skip_name_resolve = ON
 max_connections = {{ mysql_max_connections }}
 table_open_cache = 2048
-datadir = {{ mysql_datadir }}
 log_error_verbosity = {{ mysql_log_error_verbosity }}
 slow_query_log = 1
 log_output = FILE
