@@ -1,9 +1,9 @@
 ---
 
-- name: add base config
+- name: Add base config
   ansible.builtin.copy:
     src: jail.conf
     dest: /etc/fail2ban/jail.d/mysql.conf
     mode: 0644
   become: yes
-  notify: restart_fail2ban
+  notify: Restart_fail2ban

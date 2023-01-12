@@ -1,6 +1,6 @@
 ---
 
-- name: add logrotate config
+- name: Add logrotate config
   ansible.builtin.template:
     src: logrotate.conf
     dest: /etc/logrotate.d/mysql
