@@ -1,10 +1,10 @@
 ---
 
-- name: wait for mysql-port to be open
+- name: Wait for mysql-port to be open
   ansible.builtin.wait_for:
     port: 3306
 
-- name: wait for mysql to be ready
+- name: Wait for mysql to be ready
   community.mysql.mysql_query:
     query: SELECT VERSION()
     login_unix_socket: /var/run/mysqld/mysqld.sock
