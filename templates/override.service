@@ -1,3 +1,7 @@
 [Service]
 LimitNOFILE = infinity
 LimitMEMLOCK = infinity
+
+{% if mysql_cpu_affinity is defined and mysql_cpu_affinity|length > 0 %}
+CPUAffinity={{ mysql_cpu_affinity|join(',') }}
+{% endif %}
