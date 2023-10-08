@@ -9,9 +9,9 @@
   become: true
 
 - name: Add apt key
-  ansible.builtin.get_url:
-    url: https://keys.openpgp.org/vks/v1/by-fingerprint/859BE8D7C586F538430B19C2467B942D3A79BD29
-    dest: /etc/apt/trusted.gpg.d/mysql.gpg
+  ansible.builtin.copy:
+    src: mysql.asc
+    dest: /etc/apt/trusted.gpg.d/mysql.asc
     mode: '0644'
   become: true
 
