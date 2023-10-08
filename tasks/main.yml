@@ -9,8 +9,8 @@
 - name: Check if munin-node is installed
   ansible.builtin.command: dpkg -L munin-node
   register: dpkg_munin_node_check
-  changed_when: no
-  ignore_errors: yes
+  changed_when: false
+  ignore_errors: true
 
 - name: Import munin-plugin.yml
   ansible.builtin.import_tasks: munin-plugin.yml
@@ -19,8 +19,8 @@
 - name: Check if fail2ban is installed
   ansible.builtin.command: dpkg -L fail2ban
   register: dpkg_fail2ban_check
-  changed_when: no
-  ignore_errors: yes
+  changed_when: false
+  ignore_errors: true
 
 - name: Import fail2ban-jail.yml
   ansible.builtin.import_tasks: fail2ban-jail.yml
@@ -29,8 +29,8 @@
 - name: Check if zabbix-agent is installed
   ansible.builtin.command: dpkg -L zabbix-agent
   register: dpkg_zabbix_agent_check
-  changed_when: no
-  ignore_errors: yes
+  changed_when: false
+  ignore_errors: true
 
 - name: Import zabbix-agent.yml
   ansible.builtin.import_tasks: zabbix-agent.yml

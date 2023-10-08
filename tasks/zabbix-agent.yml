@@ -8,10 +8,10 @@
   ansible.builtin.file:
     path: /var/lib/zabbix
     state: directory
-    mode: 0755
+    mode: '0755'
     owner: zabbix
     group: zabbix
-  become: yes
+  become: true
 
 - name: Add zabbix .my.cnf
   ansible.builtin.copy:
@@ -21,30 +21,30 @@
       user = {{ mysql_user }}
       password = {{ mysql_password }}
     dest: /var/lib/zabbix/.my.cnf
-    mode: 0640
+    mode: '0640'
     owner: zabbix
     group: zabbix
-  become: yes
+  become: true
   notify: Mysql_restart_zabbix_agent
 
 - name: Fix error-log dir perms
   ansible.builtin.file:
     path: "{{ item }}"
-    mode: 0750
+    mode: '0750'
     owner: mysql
     group: zabbix
   with_items:
     - /var/log/mysql
-  become: yes
+  become: true
   notify: Mysql_restart_zabbix_agent
 
 - name: Fix error-log file perms
   ansible.builtin.file:
     path: "{{ item }}"
-    mode: 0640
+    mode: '0640'
     owner: mysql
     group: zabbix
   with_items:
     - /var/log/mysql/error.log
-  become: yes
+  become: true
   notify: Mysql_restart_zabbix_agent

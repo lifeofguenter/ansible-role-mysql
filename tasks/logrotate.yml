@@ -6,5 +6,5 @@
     dest: /etc/logrotate.d/mysql
     owner: root
     group: root
-    mode: 0644
-  become: yes
+    mode: '0644'
+  become: true
