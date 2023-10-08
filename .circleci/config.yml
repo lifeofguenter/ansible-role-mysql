@@ -7,16 +7,15 @@ jobs:
   build:
     machine:
       # https://circleci.com/docs/2.0/configuration-reference/#machine
-      image: ubuntu-2004:202201-02
+      image: ubuntu-2204:2023.07.2
     environment:
       ANSIBLE_PYTHON_INTERPRETER: /usr/bin/python3
 
     steps:
-      - run: sudo rm /etc/apt/sources.list.d/google.list /etc/apt/sources.list.d/heroku.list
+      - run: sudo rm -f /etc/apt/sources.list.d/google* /etc/apt/sources.list.d/heroku*
       - run: sudo apt-get update
       - run: sudo apt remove --assume-yes --purge apparmor
-      - run: sudo apt install --assume-yes net-tools
-      - run: pip3 install ansible ansible-lint
+      - run: sudo apt install --assume-yes ansible ansible-lint net-tools tree
 
       - run: ansible --version
       - run: ansible-lint --version
