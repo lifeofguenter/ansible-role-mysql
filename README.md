@@ -23,7 +23,7 @@ mysql_password: *required*
 
 mysql_bind_address: 127.0.0.1
 mysqlx_bind_address: "{{ mysql_bind_address }}"
-mysqlx_disable: yes
+mysqlx_disable: true
 
 mysql_charset: utf8mb4
 mysql_collation: "{{ mysql_charset }}_0900_ai_ci"

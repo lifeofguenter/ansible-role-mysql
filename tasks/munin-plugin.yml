@@ -6,17 +6,17 @@
       - libdbd-mysql-perl
       - libcache-cache-perl
     state: present
-    update_cache: yes
+    update_cache: true
     cache_valid_time: 3600
-  become: yes
+  become: true
 
 - name: Fix munin plugin for mysql 5.7
   ansible.builtin.get_url:
-     url: https://raw.githubusercontent.com/munin-monitoring/munin/master/plugins/node.d/mysql_
-     dest: /usr/share/munin/plugins/mysql_
-     mode: "a+x"
-     force: yes
-  become: yes
+    url: https://raw.githubusercontent.com/munin-monitoring/munin/master/plugins/node.d/mysql_
+    dest: /usr/share/munin/plugins/mysql_
+    mode: 'a+x'
+    force: true
+  become: true
 
 - name: Add mysql_commands plugin
   ansible.builtin.file:
@@ -24,7 +24,7 @@
     dest: /etc/munin/plugins/mysql_commands
     state: link
   notify: Restart_munin_node
-  become: yes
+  become: true
 
 - name: Add mysql_connections plugin
   ansible.builtin.file:
@@ -32,7 +32,7 @@
     dest: /etc/munin/plugins/mysql_connections
     state: link
   notify: Restart_munin_node
-  become: yes
+  become: true
 
 - name: Add mysql_network_traffic plugin
   ansible.builtin.file:
@@ -40,7 +40,7 @@
     dest: /etc/munin/plugins/mysql_network_traffic
     state: link
   notify: Restart_munin_node
-  become: yes
+  become: true
 
 - name: Add munin plugin-conf
   ansible.builtin.copy:
@@ -50,6 +50,6 @@
       env.mysqlopts ""
       env.mysqluser root
     dest: /etc/munin/plugin-conf.d/mysql_
-    mode: 0644
+    mode: '0644'
   notify: Restart_munin_node
-  become: yes
+  become: true

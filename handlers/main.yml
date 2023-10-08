@@ -2,30 +2,30 @@
 
 - name: Reload_systemd
   ansible.builtin.systemd:
-    daemon_reload: yes
-  become: yes
+    daemon_reload: true
+  become: true
 
 - name: Restart_mysql
   ansible.builtin.systemd:
     name: mysql
     state: restarted
-    enabled: yes
-  become: yes
+    enabled: true
+  become: true
 
 - name: Restart_munin_node
   ansible.builtin.systemd:
     name: munin-node
     state: restarted
-  become: yes
+  become: true
 
 - name: Restart_fail2ban
   ansible.builtin.systemd:
     name: fail2ban
     state: restarted
-  become: yes
+  become: true
 
 - name: Mysql_restart_zabbix_agent
   ansible.builtin.systemd:
     name: zabbix-agent
     state: restarted
-  become: yes
+  become: true

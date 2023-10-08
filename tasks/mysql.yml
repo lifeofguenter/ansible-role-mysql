@@ -4,21 +4,22 @@
   ansible.builtin.apt:
     name: python3-pymysql
     state: present
-    update_cache: yes
+    update_cache: true
     cache_valid_time: 3600
-  become: yes
+  become: true
 
-- name: Add mysql.com apt-key
-  ansible.builtin.apt_key:
-    id: 859BE8D7C586F538430B19C2467B942D3A79BD29
-    keyserver: keyserver.ubuntu.com
-  become: yes
+- name: Add apt key
+  ansible.builtin.get_url:
+    url: https://keys.openpgp.org/vks/v1/by-fingerprint/859BE8D7C586F538430B19C2467B942D3A79BD29
+    dest: /etc/apt/trusted.gpg.d/mysql.asc
+    mode: '0644'
+  become: true
 
 - name: Add repository
   ansible.builtin.apt_repository:
-    repo: deb http://repo.mysql.com/apt/{{ ansible_distribution | lower }}/ {{ ansible_distribution_release }} mysql-{{ mysql_version }} mysql-tools
+    repo: deb http://repo.mysql.com/apt/{{ ansible_distribution | lower }}/ {{ mysql_default_release }} mysql-{{ mysql_version }} mysql-tools
     state: present
-  become: yes
+  become: true
 
 - name: Install mysql packages
   ansible.builtin.apt:
@@ -27,15 +28,15 @@
       - mysql-client
       - libmysqlclient-dev
     state: present
-    update_cache: yes
+    update_cache: true
     cache_valid_time: 3600
-  become: yes
+  become: true
 
 - name: Ensure mysql is running
   ansible.builtin.systemd:
     name: mysql
     state: started
-  become: yes
+  become: true
 
 - name: Create admin user
   community.mysql.mysql_user:
@@ -44,18 +45,18 @@
     host: "%"
     priv: "*.*:ALL,GRANT"
     state: present
-    check_implicit_admin: yes
+    check_implicit_admin: true
     login_unix_socket: /var/run/mysqld/mysqld.sock
-  no_log: yes
-  become: yes
+  no_log: true
+  become: true
 
 - name: Add custom.cnf
   ansible.builtin.template:
     src: custom.cnf
     dest: /etc/mysql/conf.d/custom.cnf
-    mode: 0644
+    mode: '0644'
   notify: Restart_mysql
-  become: yes
+  become: true
 
 - name: Check for mysqld.cnf
   ansible.builtin.stat:
@@ -69,6 +70,6 @@
     state: absent
   with_items:
     - bind-address
-  become: yes
+  become: true
   when: mysqld_cnf.stat.exists
   notify: Restart_mysql

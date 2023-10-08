@@ -12,10 +12,10 @@
   until: _mysql_tmp_select_version is success
   retries: 60
   delay: 5
-  become: yes
+  become: true
 
 - name: Create databases
   community.mysql.mysql_db:
     name: "{{ mysql_databases }}"
     login_unix_socket: /var/run/mysqld/mysqld.sock
-  become: yes
+  become: true
