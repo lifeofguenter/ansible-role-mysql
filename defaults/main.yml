@@ -23,4 +23,4 @@ mysql_databases: []
 
 mysql_cpu_affinity: []
 
-mysql_default_release: '{{ ansible_distribution_release }}'
+mysql_default_release: '{{ ansible_distribution_release | lower }}'
