@@ -21,6 +21,11 @@ tls_version = TLSv1.2,TLSv1.3
 require_secure_transport = {{ mysql_require_secure_transport }}
 max_allowed_packet = 64M
 
+{% if mysql_wait_timeout %}
+wait_timeout = {{ mysql_wait_timeout }}
+interactive_timeout = {{ mysql_wait_timeout }}
+{% endif %}
+
 #
 # * InnoDB
 #
