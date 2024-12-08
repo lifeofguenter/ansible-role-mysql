@@ -30,7 +30,6 @@ mysql_collation: "{{ mysql_charset }}_0900_ai_ci"
 #mysql_collation: "{{ mysql_charset }}_unicode_520_ci"
 
 mysql_innodb_buffer_pool_size: "{{ (ansible_memtotal_mb * 0.5) | round | int }}M"
-mysql_innodb_lock_wait_timeout: 50
 mysql_innodb_log_file_size: "128M"
 
 mysql_max_connections: 256
