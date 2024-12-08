@@ -1,7 +1,7 @@
 [mysqld]
 skip_name_resolve = ON
 max_connections = {{ mysql_max_connections }}
-table_open_cache = 2048
+table_open_cache = 4096
 log_error_verbosity = {{ mysql_log_error_verbosity }}
 slow_query_log = 1
 log_output = FILE
@@ -29,22 +29,19 @@ interactive_timeout = {{ mysql_wait_timeout }}
 #
 # * InnoDB
 #
-innodb_log_file_size = {{ mysql_innodb_log_file_size }}
 innodb_buffer_pool_size = {{ mysql_innodb_buffer_pool_size }}
+innodb_log_file_size = {{ mysql_innodb_log_file_size }}
 innodb_log_buffer_size = 8M
 innodb_file_per_table = 1
-innodb_open_files = 400
-innodb_io_capacity = 200
-innodb_io_capacity_max = 400
-innodb_lru_scan_depth = 200
-innodb_flush_neighbors = 0
 innodb_flush_method = O_DIRECT
-innodb_flush_log_at_trx_commit = 0
-innodb_thread_concurrency = 8
 {% if mysql_version is version('8.0', '<') %}
+innodb_flush_neighbors = 0
+innodb_thread_concurrency = 8
 innodb_large_prefix = 1
 {% endif %}
+{% if mysql_innodb_lock_wait_timeout is defined %}
 innodb_lock_wait_timeout = {{ mysql_innodb_lock_wait_timeout }}
+{% endif %}
 
 #
 # * Character sets
