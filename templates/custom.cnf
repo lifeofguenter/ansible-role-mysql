@@ -1,4 +1,7 @@
 [mysqld]
+{% if mysql_disable_log_bin | default(false) | bool %}
+disable_log_bin
+{% endif %}
 skip_name_resolve = ON
 max_connections = {{ mysql_max_connections }}
 table_open_cache = {{ mysql_table_open_cache | default('4096') }}

@@ -1,5 +1,9 @@
 ---
 
+# TODO:
+# caching_sha2_password >= 8.4
+# mysql_native_password < 8.4
+
 - name: Import mysql.yml
   ansible.builtin.import_tasks: mysql.yml
 
