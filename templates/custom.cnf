@@ -38,14 +38,16 @@ max_heap_table_size = {{ mysql_max_heap_table_size | default('32M') }}
 # * InnoDB
 #
 innodb_buffer_pool_size = {{ mysql_innodb_buffer_pool_size }}
-innodb_log_file_size = {{ mysql_innodb_log_file_size }}
 innodb_log_buffer_size = 8M
 innodb_file_per_table = 1
 innodb_flush_method = O_DIRECT
 {% if mysql_version is version('8.0', '<') %}
+innodb_log_file_size = {{ mysql_innodb_log_file_size }}
 innodb_flush_neighbors = 0
 innodb_thread_concurrency = 8
 innodb_large_prefix = 1
+{% else %}
+innodb_redo_log_capacity = {{ mysql_innodb_redo_log_capacity | default('256M') }}
 {% endif %}
 {% if mysql_innodb_lock_wait_timeout is defined %}
 innodb_lock_wait_timeout = {{ mysql_innodb_lock_wait_timeout }}
