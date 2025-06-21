@@ -1,7 +1,7 @@
 [mysqld]
 skip_name_resolve = ON
 max_connections = {{ mysql_max_connections }}
-table_open_cache = 4096
+table_open_cache = {{ mysql_table_open_cache | default('4096') }}
 log_error_verbosity = {{ mysql_log_error_verbosity }}
 slow_query_log = 1
 log_output = FILE
@@ -25,6 +25,14 @@ max_allowed_packet = 64M
 wait_timeout = {{ mysql_wait_timeout }}
 interactive_timeout = {{ mysql_wait_timeout }}
 {% endif %}
+
+#
+# * Buffers
+#
+join_buffer_size = {{ mysql_join_buffer_size | default('512K') }}
+sort_buffer_size = {{ mysql_sort_buffer_size | default('512K') }}
+tmp_table_size = {{ mysql_tmp_table_size | default('32M') }}
+max_heap_table_size = {{ mysql_max_heap_table_size | default('32M') }}
 
 #
 # * InnoDB
