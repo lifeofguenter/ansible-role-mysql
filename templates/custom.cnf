@@ -29,10 +29,10 @@ interactive_timeout = {{ mysql_wait_timeout }}
 #
 # * Buffers
 #
-join_buffer_size = {{ mysql_join_buffer_size | default(512K) }}
-sort_buffer_size = {{ mysql_sort_buffer_size | default(512K) }}
-tmp_table_size = {{ mysql_tmp_table_size | default(32M) }}
-max_heap_table_size = {{ mysql_max_heap_table_size | default(32M) }}
+join_buffer_size = {{ mysql_join_buffer_size | default('512K') }}
+sort_buffer_size = {{ mysql_sort_buffer_size | default('512K') }}
+tmp_table_size = {{ mysql_tmp_table_size | default('32M') }}
+max_heap_table_size = {{ mysql_max_heap_table_size | default('32M') }}
 
 #
 # * InnoDB
