@@ -55,6 +55,9 @@ innodb_redo_log_capacity = {{ mysql_innodb_redo_log_capacity | default('256M') }
 {% if mysql_innodb_lock_wait_timeout is defined %}
 innodb_lock_wait_timeout = {{ mysql_innodb_lock_wait_timeout }}
 {% endif %}
+# fulltext optimizations
+innodb_ft_total_cache_size = {{ mysql_innodb_ft_total_cache_size | default('640000000') }}
+innodb_ft_cache_size = {{ mysql_innodb_ft_cache_size | default('8000000') }}
 
 #
 # * Character sets
