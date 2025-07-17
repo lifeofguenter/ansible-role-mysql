@@ -21,6 +21,22 @@
     state: present
   become: true
 
+- name: Pre-create /etc/mysql/conf.d
+  ansible.builtin.file:
+    path: /etc/mysql/conf.d
+    state: directory
+    mode: '0755'
+  become: true
+
+# https://askubuntu.com/a/1328613
+- name: Add custom.cnf
+  ansible.builtin.template:
+    src: custom.cnf
+    dest: /etc/mysql/conf.d/custom.cnf
+    mode: '0644'
+  notify: Restart_mysql
+  become: true
+
 - name: Install mysql packages
   ansible.builtin.apt:
     name:
@@ -51,14 +67,6 @@
     plugin_auth_string: "{% if mysql_auth_plugin == 'caching_sha2_password' %}{{ mysql_password }}{% endif %}"
     salt: "{{ mysql_auth_salt | default('') }}"
   no_log: true
-  become: true
-
-- name: Add custom.cnf
-  ansible.builtin.template:
-    src: custom.cnf
-    dest: /etc/mysql/conf.d/custom.cnf
-    mode: '0644'
-  notify: Restart_mysql
   become: true
 
 - name: Check for mysqld.cnf
