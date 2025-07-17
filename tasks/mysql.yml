@@ -52,6 +52,8 @@
     check_implicit_admin: true
     login_unix_socket: /var/run/mysqld/mysqld.sock
     plugin: "{{ mysql_auth_plugin }}"
+    plugin_auth_string: password
+    salt: "{{ mysql_auth_salt | default('') }}"
   # no_log: true
   become: true
 
