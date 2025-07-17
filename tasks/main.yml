@@ -14,30 +14,30 @@
   ansible.builtin.command: dpkg -L munin-node
   register: dpkg_munin_node_check
   changed_when: false
-  ignore_errors: true
+  failed_when: "'command not found' in dpkg_munin_node_check.stderr"
 
-- name: Import munin-plugin.yml
-  ansible.builtin.import_tasks: munin-plugin.yml
+- name: Include munin-plugin.yml
+  ansible.builtin.include_tasks: munin-plugin.yml
   when: dpkg_munin_node_check is success
 
 - name: Check if fail2ban is installed
   ansible.builtin.command: dpkg -L fail2ban
   register: dpkg_fail2ban_check
   changed_when: false
-  ignore_errors: true
+  failed_when: "'command not found' in dpkg_fail2ban_check.stderr"
 
-- name: Import fail2ban-jail.yml
-  ansible.builtin.import_tasks: fail2ban-jail.yml
+- name: Include fail2ban-jail.yml
+  ansible.builtin.include_tasks: fail2ban-jail.yml
   when: dpkg_fail2ban_check is success
 
 - name: Check if zabbix-agent is installed
   ansible.builtin.command: dpkg -L zabbix-agent
   register: dpkg_zabbix_agent_check
   changed_when: false
-  ignore_errors: true
+  failed_when: "'command not found' in dpkg_zabbix_agent_check.stderr"
 
-- name: Import zabbix-agent.yml
-  ansible.builtin.import_tasks: zabbix-agent.yml
+- name: Include zabbix-agent.yml
+  ansible.builtin.include_tasks: zabbix-agent.yml
   when: dpkg_zabbix_agent_check is success
 
 # run this as last as it relies on set_facts from zabbix-agent
