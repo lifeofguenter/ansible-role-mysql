@@ -38,6 +38,10 @@
     state: started
   become: true
 
+- name: Debug
+  ansible.builtin.debug:
+    msg: "mysql_auth_plugin: {{ mysql_auth_plugin }}"
+
 - name: Create admin user
   community.mysql.mysql_user:
     name: "{{ mysql_user }}"
