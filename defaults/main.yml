@@ -25,4 +25,4 @@ mysql_cpu_affinity: []
 
 mysql_default_release: '{{ ansible_distribution_release | lower }}'
 
-mysql_auth_plugin: "{% if mysql_version is version('8.4', '>=') %}caching_sha2_password{% else %}mysql_native_password{% endif %}"
+mysql_auth_plugin: "{% if mysql_version.split('-')[0] is version('8.4', '>=') %}caching_sha2_password{% else %}mysql_native_password{% endif %}"
