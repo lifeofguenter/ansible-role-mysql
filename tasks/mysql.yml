@@ -48,7 +48,7 @@
     check_implicit_admin: true
     login_unix_socket: /var/run/mysqld/mysqld.sock
     plugin: "{{ mysql_auth_plugin }}"
-  no_log: true
+  # no_log: true
   become: true
 
 - name: Add custom.cnf
