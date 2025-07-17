@@ -25,7 +25,6 @@
   ansible.builtin.file:
     path: /etc/mysql/conf.d
     state: directory
-    recurse: true
     mode: '0755'
   become: true
 
