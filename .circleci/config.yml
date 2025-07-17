@@ -36,6 +36,8 @@ jobs:
       - run:
           command: sudo cat /var/log/mysql/error.log
           when: on_fail
+      - run: ls -lh /etc/mysql/conf.d/
+      - run: ls -lh /etc/mysql/
 
       - run: ansible-playbook tests/test.yml -i tests/inventory --connection=local
 
@@ -43,3 +45,6 @@ jobs:
       - run: mysql -h127.0.0.1 -utradmin -ptest -e 'SELECT VERSION();'
       - run: mysql -h127.0.0.1 -utradmin -ptest -e 'SHOW DATABASES;'
       - run: netstat -lnp
+
+      - run: ls -lh /etc/mysql/conf.d/
+      - run: ls -lh /etc/mysql/
