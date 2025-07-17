@@ -38,22 +38,18 @@
     state: started
   become: true
 
-- name: Debug
-  ansible.builtin.debug:
-    msg: "mysql_auth_plugin: {{ mysql_auth_plugin }}"
-
 - name: Create admin user
   community.mysql.mysql_user:
     name: "{{ mysql_user }}"
-    password: "{{ mysql_password }}"
+    password: "{% if mysql_auth_plugin == 'mysql_native_password' %}{{ mysql_password }}{% endif %}"
     host: "%"
     priv: "*.*:ALL,GRANT"
     state: present
     check_implicit_admin: true
     login_unix_socket: /var/run/mysqld/mysqld.sock
     plugin: "{{ mysql_auth_plugin }}"
-    plugin_auth_string: password
-    salt: "{{ mysql_auth_salt | default('') }}"
+    plugin_auth_string: "{% if mysql_auth_plugin == 'caching_sha2_password' %}{{ mysql_password }}{% endif %}"
+    salt: "{{ mysql_auth_salt }}"
   # no_log: true
   become: true
 
