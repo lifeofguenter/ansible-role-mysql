@@ -21,6 +21,14 @@
     state: present
   become: true
 
+- name: Pre-create /etc/mysql/conf.d
+  ansible.builtin.file:
+    path: /etc/mysql/conf.d
+    state: directory
+    recurse: true
+    mode: '0755'
+  become: true
+
 # https://askubuntu.com/a/1328613
 - name: Add custom.cnf
   ansible.builtin.template:
