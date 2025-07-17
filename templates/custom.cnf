@@ -18,11 +18,12 @@ mysqlx = OFF
 mysqlx = ON
 {% endif %}
 mysqlx_bind_address = {{ mysqlx_bind_address }}
-admin_tls_version = TLSv1.2,TLSv1.3
+admin_tls_version = TLSv1.3
 {% endif %}
-tls_version = TLSv1.2,TLSv1.3
+tls_version = TLSv1.3
 require_secure_transport = {{ mysql_require_secure_transport }}
 max_allowed_packet = 64M
+lower_case_table_names = 1
 
 {% if mysql_wait_timeout is defined %}
 wait_timeout = {{ mysql_wait_timeout }}
