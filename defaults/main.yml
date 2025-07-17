@@ -16,7 +16,7 @@ mysql_max_connections: 256
 mysql_log_error_verbosity: 2
 mysql_require_secure_transport: 'ON'
 
-mysql_version: "8.0"
+mysql_version: "8.4-lts"
 # mysql_version: "5.7"
 
 mysql_databases: []
@@ -24,3 +24,5 @@ mysql_databases: []
 mysql_cpu_affinity: []
 
 mysql_default_release: '{{ ansible_distribution_release | lower }}'
+
+mysql_auth_plugin: "{% if mysql_version is version('8.4', '>=') %}caching_sha2_password{% else %}mysql_native_password{% endif %}"
