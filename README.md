@@ -36,8 +36,9 @@ mysql_max_connections: 256
 mysql_log_error_verbosity: 2
 mysql_require_secure_transport: ON
 
-mysql_version: "8.0"
-#mysql_version: "5.7"
+mysql_version: "8.4-lts"
+# mysql_version: "8.0"
+# mysql_version: "5.7"
 
 mysql_databases: []
 ```
