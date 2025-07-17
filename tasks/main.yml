@@ -18,7 +18,7 @@
 
 - name: Include munin-plugin.yml
   ansible.builtin.include_tasks: munin-plugin.yml
-  when: dpkg_munin_node_check is success
+  when: dpkg_munin_node_check.rc == 0
 
 - name: Check if fail2ban is installed
   ansible.builtin.command: dpkg -L fail2ban
@@ -28,7 +28,7 @@
 
 - name: Include fail2ban-jail.yml
   ansible.builtin.include_tasks: fail2ban-jail.yml
-  when: dpkg_fail2ban_check is success
+  when: dpkg_fail2ban_check.rc == 0
 
 - name: Check if zabbix-agent is installed
   ansible.builtin.command: dpkg -L zabbix-agent
@@ -38,12 +38,12 @@
 
 - name: Include zabbix-agent.yml
   ansible.builtin.include_tasks: zabbix-agent.yml
-  when: dpkg_zabbix_agent_check is success
+  when: dpkg_zabbix_agent_check.rc == 0
 
 # run this as last as it relies on set_facts from zabbix-agent
 - name: Import logrotate.yml
   ansible.builtin.import_tasks: logrotate.yml
 
-- name: Import database.yml
-  ansible.builtin.import_tasks: databases.yml
+- name: Include database.yml
+  ansible.builtin.include_tasks: databases.yml
   when: mysql_databases is defined and mysql_databases | length > 0

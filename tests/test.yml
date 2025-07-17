@@ -3,13 +3,13 @@
 - hosts: localhost
 
   vars:
-    mysql_version: 8.0
+    # mysql_version: 8.0
     mysql_user: tradmin
     mysql_password: test
     mysql_databases:
       - foo
       - bar
-    # mysql_auth_salt: "{{ lookup('ansible.builtin.password', '/dev/null', length=20, chars='ascii_letters') }}"
+    mysql_auth_salt: "{{ lookup('ansible.builtin.password', '/dev/null', length=20, chars='ascii_letters') }}"
 
   tasks:
     - ansible.builtin.import_role:
