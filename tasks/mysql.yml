@@ -70,6 +70,7 @@
     update_password: "{{ mysql_update_password | default('always') }}"
   no_log: true
   become: true
+  when: mysql_user is defined and mysql_password is defined
 
 - name: Check for mysqld.cnf
   ansible.builtin.stat:
