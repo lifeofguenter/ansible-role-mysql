@@ -66,6 +66,7 @@
     plugin: "{{ mysql_auth_plugin }}"
     plugin_auth_string: "{% if mysql_auth_plugin == 'caching_sha2_password' %}{{ mysql_password }}{% endif %}"
     salt: "{{ mysql_auth_salt | default('') }}"
+    sql_log_bin: false
   no_log: true
   become: true
 
