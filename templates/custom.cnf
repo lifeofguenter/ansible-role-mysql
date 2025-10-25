@@ -23,7 +23,7 @@ admin_tls_version = TLSv1.3
 tls_version = TLSv1.3
 require_secure_transport = {{ mysql_require_secure_transport }}
 max_allowed_packet = 64M
-lower_case_table_names = 1
+lower_case_table_names =  {{ mysql_lower_case_table_names | default(1) | int }}
 
 {% if mysql_wait_timeout is defined %}
 wait_timeout = {{ mysql_wait_timeout }}

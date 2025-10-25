@@ -68,6 +68,7 @@
     salt: "{{ mysql_auth_salt | default('') }}"
     sql_log_bin: false
     update_password: "{{ mysql_update_password | default('always') }}"
+    column_case_sensitive: false
   no_log: true
   become: true
   when: mysql_user is defined and mysql_password is defined
