@@ -66,5 +66,7 @@ innodb_ft_cache_size = {{ mysql_innodb_ft_cache_size | default('8000000') }}
 character_set_server = {{ mysql_charset }}
 collation_server = {{ mysql_collation }}
 
-[client]
-default_character_set = {{ mysql_charset }}
+{% if mysql_client_charset is defined and mysql_client_charset != "" %}
+[mysql]
+default_character_set = {{ mysql_client_charset }}
+{% endif %}

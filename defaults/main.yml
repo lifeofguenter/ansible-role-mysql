@@ -5,6 +5,7 @@ mysqlx_bind_address: "{{ mysql_bind_address }}"
 mysqlx_disable: true
 
 mysql_charset: utf8mb4
+mysql_client_charset: "{{ mysql_charset }}"
 mysql_collation: "{{ mysql_charset }}_0900_ai_ci"
 # mysql_collation: "{{ mysql_charset }}_unicode_520_ci"
 
