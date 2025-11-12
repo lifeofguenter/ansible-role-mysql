@@ -67,6 +67,6 @@ character_set_server = {{ mysql_charset }}
 collation_server = {{ mysql_collation }}
 
 {% if mysql_client_charset is defined and mysql_client_charset != "" %}
-[client]
+[mysql]
 default_character_set = {{ mysql_client_charset }}
 {% endif %}
